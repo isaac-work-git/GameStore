@@ -29,3 +29,15 @@
 - These are the CRUD operations (Create, Read, Update, Delete) that get referenced frequently
 - Example: GET /games
     * This will return a JSON object with the status (200 OK) and the Body ("id": 1, "name": "Street Fighter 2")
+## Object Relational Mapping (O/RM)
+- A technique for converting data between a relational database and an object-oriented program.
+### Entity Framework Core
+- A lightweight, extensible, open source and cross-platform object-relational mapper for .NET.
+- Sits between API and Database
+- Tranlates C# code into SQL statements
+- Benefits:
+    * No need to learn SQL
+    * Minimal data-access code (LINQ)
+    * Tooling to keep C# models in sync with DB tables
+    * Change tracking
+    * Multiple database providers
