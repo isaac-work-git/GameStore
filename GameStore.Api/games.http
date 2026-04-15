@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
     "name": "Horizon Zero Dawn",
-    "genre": "Action-adventure",
+    "genreId": "2",
     "price": 59.99,
     "releaseDate": "2017-03-03"
 }
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 {
     "name": "Street Fighter 2 Turbo",
-    "genre": "Fighting",
+    "genreId": "1",
     "price": 99.99,
     "releaseDate": "1992-07-15"
 }

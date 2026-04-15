@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Isaac\\Desktop\\GameStore\\GameStore.Api\\GameStore.Api.csproj": {}
+    "C:\\Users\\Isaac\\Desktop\\GameStore\\GameStore.Api\\GameStore.Api.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Isaac\\Desktop\\GameStore\\GameStore.Api\\GameStore.Api.csproj": {
+    "C:\\Users\\Isaac\\Desktop\\GameStore\\GameStore.Api\\GameStore.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Isaac\\Desktop\\GameStore\\GameStore.Api\\GameStore.Api.csproj",
+        "projectUniqueName": "C:\\Users\\Isaac\\Desktop\\GameStore\\GameStore.Api\\GameStore.Api.csproj",
         "projectName": "GameStore.Api",
-        "projectPath": "c:\\Users\\Isaac\\Desktop\\GameStore\\GameStore.Api\\GameStore.Api.csproj",
+        "projectPath": "C:\\Users\\Isaac\\Desktop\\GameStore\\GameStore.Api\\GameStore.Api.csproj",
         "packagesPath": "C:\\Users\\Isaac\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Isaac\\Desktop\\GameStore\\GameStore.Api\\obj\\",
+        "outputPath": "C:\\Users\\Isaac\\Desktop\\GameStore\\GameStore.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Isaac\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -74,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\program files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

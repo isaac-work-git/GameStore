@@ -44,4 +44,13 @@ This is a tutorial repository following a Youtube course by Julio Casal. This re
     * Change tracking
     * Multiple database providers
 ## Dependency Injection
+- In programming, a dependency is a relationship where one piece of software (the "client") relies on another piece of software (the "service" or "dependency") to function correctly. Essentially, if part A cannot run or compile without part B, then A is dependent on B.
+- IServiceProvider: Registers your dependencies
+    * Then when a new HTTP request happens, IServiceProvider will Resolve, Construct and Inject those dependencies into a new instance of your service.
+- This is helpful as your services won't be affected by changes to its dependencies
+- Your services also don't need to know how to construct or configure their dependencies
+- Dependencies can also be injected as parameters to minimal API endpoints
+### Scoped Service Lifetime
+- Scoped lifetime services are created once per HTTP request and reused within that request
+## Asynchronous Programming
 - 
