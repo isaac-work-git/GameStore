@@ -53,4 +53,9 @@ This is a tutorial repository following a Youtube course by Julio Casal. This re
 ### Scoped Service Lifetime
 - Scoped lifetime services are created once per HTTP request and reused within that request
 ## Asynchronous Programming
-- 
+- Synchronous: you don't start a new task until the previous one is complete.
+- Asynchronous: you don't wait for a task to be complete before starting a new one, performing them concurrently.
+- Benefits
+    * **Improved performance** - Avoids blocking callers, freeing them up for other tasks
+    * **Improved Scalability** - Allows your application to handle more requests and users simultaneously
+    * **Simplified Code** - Asynchronous code is simple to write via task objects and the async and await keywords

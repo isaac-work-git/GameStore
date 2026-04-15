@@ -29,7 +29,7 @@ public static class GamesEndpoints
         }).WithName(GetGameEndpointName);
 
         // POST /games endpoint that will add a new game to the list
-        group.MapPost("/", (CreateGameDto newGame, GameStoreContext dbContext) =>
+        group.MapPost("/", async (CreateGameDto newGame, GameStoreContext dbContext) =>
         {
            Game game = new () {
                 Name = newGame.Name,
@@ -39,7 +39,7 @@ public static class GamesEndpoints
             };
 
             dbContext.Games.Add(game);
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
             GameDetailsDto gameDto = new (
                 game.Id,
