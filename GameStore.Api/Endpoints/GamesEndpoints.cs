@@ -1,6 +1,7 @@
 using GameStore.Api.Data;
 using GameStore.Api.Dtos;
 using GameStore.Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.Api.Endpoints;
 
@@ -19,13 +20,31 @@ public static class GamesEndpoints
         var group = app.MapGroup("/games");
 
         // GET /games endpoint that will return all games
-        group.MapGet("/", () => games);
+        group.MapGet("/", async (GameStoreContext dbContext) 
+            => await dbContext.Games
+                .Include(game => game.Genre)
+                .Select(game => new GameDto(
+                    game.Id,
+                    game.Name,
+                    game.Genre!.Name,
+                    game.Price,
+                    game.ReleaseDate
+                )).ToListAsync());
 
         // GET /games/{id} endpoint that will return a single game by id
-        group.MapGet("/{id}", (int id) =>
+        group.MapGet("/{id}", async (int id, GameStoreContext dbContext) =>
         {
-            var game = games.FirstOrDefault(game => game.Id == id);
-            return game is null ? Results.NotFound() : Results.Ok(game);
+            var game = await dbContext.Games.FindAsync(id);
+
+            return game is null ? Results.NotFound() : Results.Ok(
+                new GameDetailsDto(
+                    game.Id,
+                    game.Name,
+                    game.GenreId,
+                    game.Price,
+                    game.ReleaseDate
+                )
+            );
         }).WithName(GetGameEndpointName);
 
         // POST /games endpoint that will add a new game to the list
