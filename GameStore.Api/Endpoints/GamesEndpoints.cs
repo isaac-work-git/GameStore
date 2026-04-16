@@ -9,12 +9,6 @@ public static class GamesEndpoints
 {
     const string GetGameEndpointName = "GetGameById";
 
-    private static readonly List<GameSummaryDto> games = [
-        new (1, "Street Fighter 2", "Fighting", 19.99M, new DateOnly(1992, 7, 15)),
-        new (2, "The Legend of Zelda: Ocarina of Time", "Action-Adventure", 29.99M, new DateOnly(1998, 11, 21)),
-        new (3, "Super Mario 64", "Platformer", 24.99M, new DateOnly(1996, 6, 23)),
-    ];
-
     public static void MapGamesEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/games");
@@ -73,29 +67,31 @@ public static class GamesEndpoints
         });
 
         // PUT /games/{id} endpoint that will update a game by id
-        group.MapPut("/{id}", (int id, UpdateGameDto updatedGame) =>
+        group.MapPut("/{id}", async (
+            int id, 
+            UpdateGameDto updatedGame, 
+            GameStoreContext dbContext) =>
         {
-            var index = games.FindIndex(game => game.Id == id);
+            var existingGame = await dbContext.Games.FindAsync(id);
 
-            if (index == -1)
+            if (existingGame == null)
             {
                 return Results.NotFound();
             }
 
-            games[index] = new GameSummaryDto(
-                Id: id,
-                Name: updatedGame.Name,
-                Genre: updatedGame.Genre,
-                Price: updatedGame.Price,
-                ReleaseDate: updatedGame.ReleaseDate
-            );
+            existingGame.Name = updatedGame.Name;
+            existingGame.GenreId = updatedGame.GenreId;
+            existingGame.Price = updatedGame.Price;
+            existingGame.ReleaseDate = updatedGame.ReleaseDate;
+
+            await dbContext.SaveChangesAsync();
             return Results.NoContent();
         });
 
         // DELETE /games/{id} endpoint that will delete a game by id
-        group.MapDelete("/{id}", (int id) =>
+        group.MapDelete("/{id}", async (int id, GameStoreContext dbContext) =>
         {
-            games.RemoveAll(game => game.Id == id);
+            await dbContext.Games.Where(game => game.Id == id).ExecuteDeleteAsync();
             return Results.NoContent();
         });
     }
