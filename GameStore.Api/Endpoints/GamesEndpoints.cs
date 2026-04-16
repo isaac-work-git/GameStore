@@ -9,7 +9,7 @@ public static class GamesEndpoints
 {
     const string GetGameEndpointName = "GetGameById";
 
-    private static readonly List<GameDto> games = [
+    private static readonly List<GameSummaryDto> games = [
         new (1, "Street Fighter 2", "Fighting", 19.99M, new DateOnly(1992, 7, 15)),
         new (2, "The Legend of Zelda: Ocarina of Time", "Action-Adventure", 29.99M, new DateOnly(1998, 11, 21)),
         new (3, "Super Mario 64", "Platformer", 24.99M, new DateOnly(1996, 6, 23)),
@@ -23,13 +23,15 @@ public static class GamesEndpoints
         group.MapGet("/", async (GameStoreContext dbContext) 
             => await dbContext.Games
                 .Include(game => game.Genre)
-                .Select(game => new GameDto(
+                .Select(game => new GameSummaryDto(
                     game.Id,
                     game.Name,
                     game.Genre!.Name,
                     game.Price,
                     game.ReleaseDate
-                )).ToListAsync());
+                ))
+                .AsNoTracking()
+                .ToListAsync());
 
         // GET /games/{id} endpoint that will return a single game by id
         group.MapGet("/{id}", async (int id, GameStoreContext dbContext) =>
@@ -80,7 +82,7 @@ public static class GamesEndpoints
                 return Results.NotFound();
             }
 
-            games[index] = new GameDto(
+            games[index] = new GameSummaryDto(
                 Id: id,
                 Name: updatedGame.Name,
                 Genre: updatedGame.Genre,
